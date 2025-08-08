@@ -1,63 +1,224 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tintin | The Crypto Goddess Empress</title>
   <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
   <style>
+    :root{
+      --gold:#D4AF37;         /* richer gold */
+      --gold-bright:#FFD700;  /* hover pop */
+      --bg:#0b0b0b;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body {
       margin: 0;
       font-family: 'UnifrakturCook', cursive;
-      background-color: #0b0b0b;
-      color: gold;
+      background-color: var(--bg);
+      color: var(--gold);
       text-align: center;
+      letter-spacing: 2px;
     }
-    .hero {
-      position: relative;
-      background: linear-gradient(to bottom, #000000aa, #000000ee), url('tintin-hero.jpg') center/cover no-repeat;
-      height: 100vh;
+ .hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 16px 40px;
+  background: url('tintin1.jpg') center/cover no-repeat;
+  overflow: hidden; /* ensures overlay fully covers */
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* shorthand for top/left/right/bottom 0 */
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.85) 0%,
+    rgba(0,0,0,0.55) 40%,
+    rgba(0,0,0,0.9) 100%
+  );
+  z-index: 0;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+
+    /* Smaller buttons in top-right */
+    .top-buttons {
+      position: absolute;
+      top: 15px;
+      right: 15px;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      gap: 0.4rem;
     }
-    .hero h1 {
-      font-size: 4em;
-      text-shadow: 2px 2px 5px #000;
-    }
-    .hero p {
-      max-width: 600px;
-      font-size: 1.2em;
-      margin-top: 1rem;
-    }
-    .buttons {
-      margin-top: 2rem;
-    }
-    button {
-      background-color: gold;
-      color: black;
-      font-weight: bold;
+    button, .btn {
+      background: var(--gold);
+      color: #111;
+      font-weight: 700;
       border: none;
-      padding: 1rem 2rem;
-      font-size: 1rem;
+      padding: 0.3rem 0.7rem;   /* smaller */
+      font-size: 0.8rem;        /* smaller */
       cursor: pointer;
-      margin: 0.5rem;
-      border-radius: 5px;
-      transition: background-color 0.3s;
+      border-radius: 4px;
+      transition: background-color 0.2s, transform 0.12s, opacity 0.2s;
+      opacity: .95;
     }
-    button:hover {
-      background-color: #d4af37;
+    button:hover, .btn:hover { background: var(--gold-bright); transform: translateY(-1px); opacity:1; }
+
+    /* Title with subtle glow animation */
+    .hero h1 {
+      font-size: 5.5em;           /* bigger */
+      margin: 0 0 10px 0;
+      letter-spacing: 6px;        /* extra spacing */
+      text-shadow: 0 0 14px rgba(212,175,55,.35), 2px 2px 6px #000;
+      animation: glow 3s ease-in-out infinite;
+    }
+    @keyframes glow {
+      0%,100% { text-shadow: 0 0 10px rgba(212,175,55,.25), 2px 2px 6px #000; }
+      50% { text-shadow: 0 0 22px rgba(255,215,0,.55), 2px 2px 8px #000; }
+    }
+
+    .hero p {
+      max-width: 900px;
+      font-size: 1.2em;
+      margin-top: 0.5rem;
+      text-shadow: 1px 1px 3px #000;
+      line-height: 1.5;
+    }
+    .contract {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+      background: rgba(0,0,0,0.6);
+      padding: 0.5rem 0.6rem;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid rgba(212,175,55,0.35);
+      backdrop-filter: blur(2px);
+    }
+    #ca {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      color: var(--gold);
+      text-shadow: 1px 1px 2px #000;
+      user-select: all;
+      white-space: nowrap;
+    }
+    .copy { padding: 0.3rem 0.7rem; }
+
+    .socials {
+      margin-top: 1.2rem;
+      display: flex;
+      gap: 0.8rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .socials a {
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 1.05rem;
+      padding: 6px 10px;
+      border: 1px solid rgba(212,175,55,0.35);
+      border-radius: 6px;
+      background: rgba(0,0,0,0.4);
+      transition: background .2s ease, transform .12s ease, color .2s ease;
+    }
+    .socials a:hover {
+      background: rgba(212,175,55,0.12);
+      color: var(--gold-bright);
+      transform: translateY(-1px);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.85);
+      color: var(--gold);
+      border: 1px solid rgba(212,175,55,0.35);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, -3px); }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 3.2em; letter-spacing: 4px; }
+      .hero p { font-size: 1.05rem; padding: 0 6px; }
+      #ca { font-size: 0.9rem; }
     }
   </style>
 </head>
 <body>
   <section class="hero">
-    <h1>TINTIN</h1>
+    <div class="top-buttons">
+      <button class="btn" onclick="alert('Connect Wallet Coming Soon')">Wallet</button>
+      <button class="btn" onclick="alert('Stripe Access Coming Soon')">Stripe</button>
+    </div>
+
+    <h1>Tintin</h1>
+
     <p>The Crypto Goddess Empress — Half god, half human. Ruler of many kingdoms. Slayeress of the armies of evil. Anything harder than the strike of her sword is to please her.</p>
-    <div class="buttons">
-      <button onclick="alert('Connect Wallet Coming Soon')">Connect Wallet</button>
-      <button onclick="alert('Stripe Access Coming Soon')">Unlock with Stripe</button>
+
+    <div class="contract">
+      <span id="ca">0x4Aae5e23c907A0F549347816E986420f6117CAA0</span>
+      <button class="btn copy" onclick="copyCA()">Copy CA</button>
+    </div>
+
+    <div class="socials">
+      <a href="https://t.me/Tintingoddess" target="_blank" rel="noopener noreferrer">Telegram</a>
+      <a href="https://x.com/TintinGoddess" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
     </div>
   </section>
+
+  <div id="toast" class="toast">Contract address copied!</div>
+
+  <script>
+    function showToast(msg){
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(window.__toastTimeout);
+      window.__toastTimeout = setTimeout(()=> t.classList.remove('show'), 1800);
+    }
+    function copyCA() {
+      const caText = document.getElementById('ca').innerText.trim();
+      if (navigator.clipboard && window.isSecureContext){
+        navigator.clipboard.writeText(caText).then(()=> showToast('Contract address copied!'))
+        .catch(()=> fallbackCopy());
+      } else {
+        fallbackCopy();
+      }
+    }
+    function fallbackCopy(){
+      const range = document.createRange();
+      range.selectNode(document.getElementById('ca'));
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      try { document.execCommand('copy'); showToast('Contract address copied!'); }
+      catch(e){ showToast('Copy failed. Select and copy manually.'); }
+      sel.removeAllRanges();
+    }
+  </script>
 </body>
 </html>
+
