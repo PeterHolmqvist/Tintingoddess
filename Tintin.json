@@ -1,0 +1,13 @@
+{
+  "name": "Tintin Goddess",
+  "symbol": "TINTIN",
+  "description": "Tintin, the Crypto Goddess Empress — half god, half human. Ruler of many kingdoms and slayeress of the armies of evil. Holders gain access to her AI oracle, exclusive content, and a growing meme empire forged in gold and legend.",
+  "image": "https://raw.githubusercontent.com/PeterHolmqvist/Tintingoddess/main/logo.png",
+  "extensions": {
+    "website": "https://tintingoddess.xyz",
+    "twitter": "https://x.com/TintinGoddess",
+    "telegram": "https://t.me/Tintingoddess"
+  },
+  "tags": ["meme", "fantasy", "goddess", "crypto"],
+  "creator": "PeterHolmqvist"
+}
